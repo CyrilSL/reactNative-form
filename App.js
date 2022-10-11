@@ -1,21 +1,25 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import CustomForm from './CustomForm';
-import { initializeApp } from 'firebase/app';
-import firestore from "firebase/compat/firestore";
-import functions from 'firebase/functions'
-import { db, app } from './firebase'
+import { Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import Thankyou from './Thankyou';
 
-
-const image = { uri: "https://reactjs.org/logo-og.png" };
-
+const Stack = createNativeStackNavigator();
 const App = () => (
-  <View style={styles.container}>
-    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <CustomForm />
-    </ImageBackground>
-  </View>
+  
+  <NavigationContainer>
+    <PaperProvider>
+    <Stack.Navigator screenOptions={{
+    headerShown: false
+  }} initialRouteName="Home">
+        <Stack.Screen name="Home" component={CustomForm} />
+        <Stack.Screen name="Thankyou" component={Thankyou} />
+      </Stack.Navigator>
+    </PaperProvider>
+  </NavigationContainer>
 );
 
 const styles = StyleSheet.create({

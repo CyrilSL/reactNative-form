@@ -1,20 +1,22 @@
-
 import { useEffect, useState } from 'react';
-import {  Text, View, StyleSheet, TextInput, Button, Alert, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Alert, ScrollView } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { Dropdown } from 'react-native-element-dropdown';
+import { Button } from 'react-native-paper';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import countryCity from './json/countryCity.json'
 
 import { app } from './firebase'
 
-export const CustomForm = () => {
+export const CustomForm = ({ navigation }) => {
   const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
     defaultValues: {
       firstName: '',
     }
   });
 
+  const Stack = createNativeStackNavigator();
   /*states for dropdown starts*/
   const [country, setCountry] = useState(null);
   const [state, setState] = useState(null);
@@ -27,13 +29,24 @@ export const CustomForm = () => {
   const [stateData, setStateData] = useState([]);
   /*States for Dropdown ends */
 
+  const [submitButtonText, setSubmitButtonText] = useState('Register');
+  
+ 
+  const resetData = () =>{
+    reset({
+      firstName: '',
+      lastName: '',
 
+    })
+    setCountry('');
+    setState('');
+  
+}
 
   const onSubmit = data => {
     data.country = country;
     data.state = state;
-    console.log(data);
-
+    setSubmitButtonText('Registering...');
     app.firestore()
       .collection('users')
       .add({
@@ -47,7 +60,11 @@ export const CustomForm = () => {
       })
       .then(() => {
         console.log('User added!');
+        resetData();
+        navigation.navigate('Thankyou');
+        setSubmitButtonText('Submit');
       });
+      
   };
 
   const onChange = arg => {
@@ -79,7 +96,8 @@ export const CustomForm = () => {
 
     useEffect(() => {
       setCountry('United States');
-      stateListGenerator('United States')
+      stateListGenerator('United States');
+      console.log("Submit button:",submitButtonText)
       if (!countryData.length) {
         setCountryData(countryArray);
       }
@@ -105,6 +123,10 @@ export const CustomForm = () => {
     setStateData(stateArray);
   }
 
+  const sayThankyou = () => {
+
+  }
+
   const handleState = (countryName) => {
     stateListGenerator(countryName);
   }
@@ -114,22 +136,19 @@ export const CustomForm = () => {
   /* Dropdown function ends  */
   return (
     <View style={styles.container}>
+      <View>
+        <Text style={styles.title}>X-Volt Technology</Text>
+        
+      </View>
       <ScrollView>
-        <View style={[styles.resetButton, {color:'white'}]}>
+        <View style={[styles.resetButton]}>
           <Button
-            style={styles.buttonInner}
-            color
-            title="Reset"
-            onPress={() => {
-              reset({
-                firstName: '',
-                lastName: '',
+            icon="arrow-u-left-top"
 
-              })
-              setCountry('');
-              setState('');
-            }}
-          />
+            onPress={resetData}
+          >
+            Reset
+          </Button>
         </View>
         <Text style={styles.text}>Full Name</Text>
         <Controller
@@ -192,7 +211,7 @@ export const CustomForm = () => {
           }}
         />
         <View style={{ flexDirection: "row" }}>
-          <View style={[{paddingRight:5, flex: 1 }]}>
+          <View style={[{ paddingRight: 5, flex: 1 }]}>
             <Text style={styles.text}>State</Text>
 
             <Dropdown
@@ -218,7 +237,7 @@ export const CustomForm = () => {
               }}
             />
           </View>
-          <View style={[{paddingLeft:5, flex: 1 }]}>
+          <View style={[{ paddingLeft: 5, flex: 1 }]}>
             <Text style={styles.text}>Zipcode</Text>
             <Controller
               control={control}
@@ -253,14 +272,9 @@ export const CustomForm = () => {
           rules={{ required: true }}
         />
 
-        <View style={styles.button}>
-          <Button
-            style={styles.buttonInner}
-            color
-            title="Submit"
-            onPress={handleSubmit(onSubmit)}
-          />
-        </View>
+        <Button style={styles.button} icon="send" mode="contained" onPress={handleSubmit(onSubmit)}>
+        {submitButtonText}
+        </Button>
       </ScrollView>
     </View>
   );
@@ -310,11 +324,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    color: 'white',
-    height: 40,
-    backgroundColor: '#ec5990',
-    borderRadius: 4,
-    align: 1,
+    radius: 4,
+    borderRadius: 10,
   },
   container: {
     flex: 1,
@@ -332,7 +343,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 4,
     marginBottom: 10,
-
   },
   inputHalf: {
     backgroundColor: 'white',
@@ -342,13 +352,13 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginBottom: 10,
   },
-  halfHorizontal: {
- 
-  },
-
   text: {
     color: 'white',
     fontSize: 18,
+  },
+  title: {
+    color: 'white',
+    fontSize: 24,
   },
 
 });

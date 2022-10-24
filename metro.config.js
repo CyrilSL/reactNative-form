@@ -29,5 +29,8 @@ module.exports = (async () => {
                 'mdx',
             ],
         },
+        transformer: {
+            assetPlugins: ['expo-asset/tools/hashAssetFiles'],
+          }
     };
 })();

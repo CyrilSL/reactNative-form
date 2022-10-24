@@ -1,31 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, Animated, Easing, StyleSheet } from 'react-native';
-import Lottie from 'lottie-react-native';
+import { Button } from 'react-native-paper';
 
-export default function ControllingAnimationProgress() {
-  const animationProgress = useRef(new Animated.Value(0))
+const Thankyou=(navigation)=> {
 
-  useEffect(() => {
-    Animated.timing(animationProgress.current, {
-      toValue: 1,
-      duration: 5000,
-      easing: Easing.linear,
-      useNativeDriver: false
-    }).start();
-  }, [])
-
+const goHome =()=>{
+  navigation.navigate('Home');
+}
   return (
     <View style={styles.container}>
-        
         <Text style={styles.text}>Thank you for registering with</Text>
         <Text style={styles.text}>X-Volt Technology LLC!</Text>
-        <Text style={styles.text}>App updates and news coming!</Text>
-      <Lottie
-        style={styles.animation}
-        source={require('./assets/54504-confetti.json')}
-        progress={animationProgress.current}
-      />
-
+        <Text style={styles.text}>More app updates and news coming up!</Text>
     </View>
   );
 }
@@ -54,3 +40,5 @@ const styles = StyleSheet.create(
     }
   }
 );
+
+export default Thankyou;

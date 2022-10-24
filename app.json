@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "x-volt",
-    "slug": "x-volt",
+    "name": "X-Volt Technology",
+    "slug": "X-Volt",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0e101c"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -19,17 +19,22 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.kxyril.xvolt"
+      "bundleIdentifier": "com.app.xvolt"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.kxyril.xvolt"
+      "package": "com.app.xvolt"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "94eadf4c-7364-47d9-8db3-9e58133d6cc9"
+      }
     }
   }
 }

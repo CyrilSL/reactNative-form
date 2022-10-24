@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, TextInput, Alert, ScrollView } from 'react-nati
 import { useForm, Controller } from 'react-hook-form';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Button } from 'react-native-paper';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import countryCity from './json/countryCity.json'
 
@@ -16,7 +15,6 @@ export const CustomForm = ({ navigation }) => {
     }
   });
 
-  const Stack = createNativeStackNavigator();
   /*states for dropdown starts*/
   const [country, setCountry] = useState(null);
   const [state, setState] = useState(null);
@@ -30,9 +28,9 @@ export const CustomForm = ({ navigation }) => {
   /*States for Dropdown ends */
 
   const [submitButtonText, setSubmitButtonText] = useState('Register');
-  
- 
-  const resetData = () =>{
+
+
+  const resetData = () => {
     reset({
       firstName: '',
       lastName: '',
@@ -40,31 +38,55 @@ export const CustomForm = ({ navigation }) => {
     })
     setCountry('');
     setState('');
-  
-}
+
+  }
+
+  const isValidEmail = email =>
+    // eslint-disable-next-line no-useless-escape
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      email
+    );
 
   const onSubmit = data => {
     data.country = country;
     data.state = state;
+    if (data.email !== '') {
+      const isValid = isValidEmail(data.email);
+      console.log(isValid);
+      if (!isValid) {
+
+        Alert.alert(
+          "Alert",
+          "Enter a valid e-mail address!",
+          [
+            
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
+
+
+
+        return;
+      }
+    }
     setSubmitButtonText('Registering...');
     app.firestore()
       .collection('users')
       .add({
         firstName: data.firstName,
-        address: data.country,
-        city: data.address,
+        address: data.address,
         state: data.state,
         country: data.country,
         zipcode: data.zipcode,
         emailAddress: data.email
       })
       .then(() => {
+        navigation.navigate('Thankyou');
         console.log('User added!');
         resetData();
-        navigation.navigate('Thankyou');
         setSubmitButtonText('Submit');
       });
-      
+
   };
 
   const onChange = arg => {
@@ -97,7 +119,6 @@ export const CustomForm = ({ navigation }) => {
     useEffect(() => {
       setCountry('United States');
       stateListGenerator('United States');
-      console.log("Submit button:",submitButtonText)
       if (!countryData.length) {
         setCountryData(countryArray);
       }
@@ -131,14 +152,12 @@ export const CustomForm = ({ navigation }) => {
     stateListGenerator(countryName);
   }
 
-  console.log(state, country);
-
   /* Dropdown function ends  */
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>X-Volt Technology</Text>
-        
+
       </View>
       <ScrollView>
         <View style={[styles.resetButton]}>
@@ -273,7 +292,7 @@ export const CustomForm = ({ navigation }) => {
         />
 
         <Button style={styles.button} icon="send" mode="contained" onPress={handleSubmit(onSubmit)}>
-        {submitButtonText}
+          {submitButtonText}
         </Button>
       </ScrollView>
     </View>

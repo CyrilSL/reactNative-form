@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, TextInput, Alert, ScrollView } from 'react-native';
+import { StatusBar ,Text, View, StyleSheet, TextInput, Alert, ScrollView } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Button } from 'react-native-paper';
@@ -7,8 +7,15 @@ import { Button } from 'react-native-paper';
 import countryCity from './json/countryCity.json'
 
 import { app } from './firebase'
-
 export const CustomForm = ({ navigation }) => {
+  const clearOnboarding = async()=>{
+    try{
+await AsyncStorage.removeItem('@viewedOnboarding');
+    }catch(err){
+        console.log('Error @clearOnboarding',err )
+    }
+  }
+  clearOnboarding;
   const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
     defaultValues: {
       firstName: '',
@@ -155,6 +162,7 @@ export const CustomForm = ({ navigation }) => {
   /* Dropdown function ends  */
   return (
     <View style={styles.container}>
+      <StatusBar animated={true} backgroundColor="#fff"  barStyle="dark-content" />
       <View>
         <Text style={styles.title}>X-Volt Technology</Text>
 

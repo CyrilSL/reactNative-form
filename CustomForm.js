@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StatusBar ,Text, View, StyleSheet, TextInput, Alert, ScrollView } from 'react-native';
+import { StatusBar, Text, View, StyleSheet, TextInput, Alert, ScrollView } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Button } from 'react-native-paper';
@@ -8,11 +8,11 @@ import countryCity from './json/countryCity.json'
 
 import { app } from './firebase'
 export const CustomForm = ({ navigation }) => {
-  const clearOnboarding = async()=>{
-    try{
-await AsyncStorage.removeItem('@viewedOnboarding');
-    }catch(err){
-        console.log('Error @clearOnboarding',err )
+  const clearOnboarding = async () => {
+    try {
+      await AsyncStorage.removeItem('@viewedOnboarding');
+    } catch (err) {
+      console.log('Error @clearOnboarding', err)
     }
   }
   clearOnboarding;
@@ -61,12 +61,10 @@ await AsyncStorage.removeItem('@viewedOnboarding');
       const isValid = isValidEmail(data.email);
       console.log(isValid);
       if (!isValid) {
-
         Alert.alert(
           "Alert",
           "Enter a valid e-mail address!",
           [
-            
             { text: "OK", onPress: () => console.log("OK Pressed") }
           ]
         );
@@ -162,7 +160,7 @@ await AsyncStorage.removeItem('@viewedOnboarding');
   /* Dropdown function ends  */
   return (
     <View style={styles.container}>
-      <StatusBar animated={true} backgroundColor="#fff"  barStyle="dark-content" />
+      <StatusBar animated={true} backgroundColor="#0e101c" barStyle="light-content" />
       <View>
         <Text style={styles.title}>X-Volt Technology</Text>
 

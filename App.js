@@ -14,62 +14,59 @@ const Stack = createNativeStackNavigator();
 
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const [viewedOnboarding, setViewedOnboarding] = useState(false);
-
-  const checkOnboarding = async () => {
-
-    try {
-      const value = await AsyncStorage.getItem('@viewedOnboarding');
-      if (value !== null) {
-        setViewedOnboarding(true);
-      }
-    } catch (err) {
-      console.log('Error @checkOnboarding: ', err)
-    } finally {
-      setLoading(false);
-    }
-
-  }
+  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
 
   useEffect(() => {
-checkOnboarding();
-  },[])
-
-
-  return (
-    <NavigationContainer>
-
-      <PaperProvider>
-
+    AsyncStorage.getItem('alreadyLaunched').then(value => {
+      if (value = true) {
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+        setIsFirstLaunch(true);
+      }
+      else {
         
-        {/*
-        {loading ? <Loading /> : viewedOnboarding ? 
-         <Stack.Navigator screenOptions={{
-          headerShown: false
-        }} initialRouteName="Home">
-              <Stack.Screen name="Home" component={CustomForm} />
-              <Stack.Screen name="Thankyou" component={Thankyou} />
-            </Stack.Navigator>
-        : <Onboarding /> }
+        setIsFirstLaunch(false);
+        console.log(isFirstLaunch);
+      }
+    })
+  })
+  
+  if (isFirstLaunch == null) {
+    return null;
+  }
+  else if (isFirstLaunch == true) {
+    return (
+      <NavigationContainer>
+        <PaperProvider>
+          <Stack.Navigator screenOptions={{
+            headerShown: false
+          }} >
+            <Stack.Screen name="Onboarding" component={Onboarding} />
+            <Stack.Screen name="Home" component={CustomForm} />
+            <Stack.Screen name="Thankyou" component={Thankyou} />
+          </Stack.Navigator>
+        </PaperProvider>
+      </NavigationContainer>
+    );
+  }
+  else if (isFirstLaunch == false)
+  {
+    return <CustomForm/>
+    
+  }
 
-
-*/}
-        
-        
-
-    <Stack.Navigator screenOptions={{
-    headerShown: false
-  }} initialRouteName="Thankyou">
-  <Stack.Screen name="Onboarding" component={Onboarding} />
-        <Stack.Screen name="Home" component={CustomForm} />
-        <Stack.Screen name="Thankyou" component={Thankyou} />
-      </Stack.Navigator>
-
-
-      </PaperProvider>
-    </NavigationContainer>
-  );
+  // return (
+  //   <NavigationContainer>
+  //     <PaperProvider>
+  //       <Stack.Navigator screenOptions={{
+  //         headerShown: false
+  //       }} >
+  //         <Stack.Screen name="Onboarding" component={Onboarding} />
+  //         <Stack.Screen name="Home" component={CustomForm} />
+  //         <Stack.Screen name="Thankyou" component={Thankyou} />
+  //       </Stack.Navigator>
+  //     </PaperProvider>
+  //   </NavigationContainer>
+  //);
 
 
 

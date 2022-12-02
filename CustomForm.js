@@ -100,6 +100,9 @@ export const CustomForm = ({ navigation }) => {
     };
   };
 
+  const goLinksView = () =>{
+    navigation.navigate('Thankyou');
+  }
   /*Dropdown menu functions Begins*/
 
   const countryArray = [];
@@ -161,6 +164,15 @@ export const CustomForm = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar animated={true} backgroundColor="#0e101c" barStyle="light-content" />
+      <View style={[styles.goBackButton]}>
+          <Button
+            icon="arrow-u-left-top"
+
+            onPress={goLinksView}
+          >
+            Links View!
+          </Button>
+        </View>
       <View>
         <Text style={styles.title}>X-Volt Technology</Text>
 
@@ -306,6 +318,13 @@ export const CustomForm = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  goBackButton: {
+    marginTop:10,
+    flexDirection: "row",
+    color: 'white',
+    justifyContent: 'flex-end',
+    align: 1,
+  },
   dropdown: {
     backgroundColor: 'white',
     borderColor: 'none',

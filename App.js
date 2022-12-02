@@ -60,7 +60,7 @@ checkOnboarding();
 
     <Stack.Navigator screenOptions={{
     headerShown: false
-  }} initialRouteName="Onboarding">
+  }} initialRouteName="Thankyou">
   <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="Home" component={CustomForm} />
         <Stack.Screen name="Thankyou" component={Thankyou} />

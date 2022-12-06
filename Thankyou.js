@@ -11,6 +11,8 @@ import {
 import {Button} from 'react-native-paper';
 
 
+const image = { };
+
 const Thankyou = ({navigation}) => {
     const goToRegistrationForm = () => {
         navigation.navigate('Home');
@@ -18,11 +20,12 @@ const Thankyou = ({navigation}) => {
 
 
     return (
-        <View style={styles.outOfContainer}>
-      <ImageBackground source={require('./assets/wallpaper.png')} resizeMode="cover" style={{width:'100%',height:'100%'}}>
+       
+     
             <View style={
                 styles.container
             }>
+                 <ImageBackground source={require('./assets/wallpaper.png')} resizeMode="cover" style={styles.image}>
                 <View style={
                     [styles.goBackButton]
                 }>
@@ -102,9 +105,10 @@ Go to Registration Form
                             }
                     }>Visit Site</Button>
                 </View>
+                </ImageBackground>
             </View>
-            </ImageBackground>
-        </View>
+           
+     
     );
 }
 

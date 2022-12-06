@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StatusBar, Text, View, StyleSheet, TextInput, Alert, ScrollView } from 'react-native';
+import { StatusBar, Text, View, StyleSheet, TextInput, Alert, ScrollView, ImageBackground } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Button } from 'react-native-paper';
@@ -172,7 +172,12 @@ export const CustomForm = ({ navigation }) => {
   /* Dropdown function ends  */
   return (
     <View style={styles.container}>
+                
+
       <StatusBar animated={true} backgroundColor="#0e101c" barStyle="light-content" />
+      <ImageBackground source={require('./assets/wallpaper.png')} resizeMode="cover" style={styles.image}>
+
+      <ScrollView style={[styles.formBox]}>
       <View style={[styles.goBackButton]}>
           <Button
             icon="arrow-u-left-top"
@@ -186,7 +191,6 @@ export const CustomForm = ({ navigation }) => {
         <Text style={styles.title}>X-Volt Technology</Text>
 
       </View>
-      <ScrollView>
         <View style={[styles.resetButton]}>
           <Button
             icon="arrow-u-left-top"
@@ -321,7 +325,9 @@ export const CustomForm = ({ navigation }) => {
         <Button style={styles.button} icon="send" mode="contained" onPress={handleSubmit(onSubmit)}>
           {submitButtonText}
         </Button>
+        
       </ScrollView>
+      </ImageBackground>
     </View>
   );
 };
@@ -380,11 +386,16 @@ const styles = StyleSheet.create({
     radius: 4,
     borderRadius: 10,
   },
+
+
+  formBox:{
+    paddingTop: '30%',
+    padding: 30,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingTop: '30%',
-    padding: 30,
+
     backgroundColor: '#0e101c',
     flexDirection: 'column',
     alignItems: 'stretch',
@@ -413,6 +424,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 24,
   },
+  image: {
+    flex: 1,
+    justifyContent: "center"
+  }
 
 });
 

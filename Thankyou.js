@@ -49,7 +49,7 @@ const Thankyou = ({navigation}) => {
                     }
                     onPress={
                         () => {
-                            Linking.openURL('https://xvolttechnology.com/');
+                            Linking.openURL('https://xvolttechnology.com/charging');
                         }
                 }>Visit Site</Button>
             </View>

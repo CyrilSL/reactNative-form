@@ -48,6 +48,14 @@ export const CustomForm = ({ navigation }) => {
 
   }
 
+  const submitSusessfulAlert = () =>
+  Alert.alert(
+    "Registeration Sucessful",
+    [
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]
+  );
+
   const isValidEmail = email =>
     // eslint-disable-next-line no-useless-escape
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -86,10 +94,11 @@ export const CustomForm = ({ navigation }) => {
         emailAddress: data.email
       })
       .then(() => {
-        navigation.navigate('Thankyou');
         console.log('User added!');
         resetData();
+        submitSusessfulAlert();
         setSubmitButtonText('Submit');
+        
       });
 
   };
@@ -170,7 +179,7 @@ export const CustomForm = ({ navigation }) => {
 
             onPress={goLinksView}
           >
-            Links View!
+            View Official Links!
           </Button>
         </View>
       <View>

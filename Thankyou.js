@@ -5,7 +5,8 @@ import {
     Animated,
     Easing,
     StyleSheet,
-    Linking
+    Linking,
+    ImageBackground
 } from 'react-native';
 import {Button} from 'react-native-paper';
 
@@ -17,79 +18,104 @@ const Thankyou = ({navigation}) => {
 
 
     return (
-        <View style={
-            styles.container
-        }>
+        <View style={styles.outOfContainer}>
+      <ImageBackground source={require('./assets/wallpaper.png')} resizeMode="cover" style={{width:'100%',height:'100%'}}>
             <View style={
-                [styles.goBackButton]
+                styles.container
             }>
-                <Button icon="arrow-u-left-top"
+                <View style={
+                    [styles.goBackButton]
+                }>
+                          <Button icon="arrow-u-left-top"
+onPress={goToRegistrationForm}>
+Go to Registration Form
+</Button>
+                </View>
+                <View>
+                    <Text style={
+                        styles.title
+                    }>Vist all our official links</Text>
 
-                    onPress={goToRegistrationForm}>
-                    Go to Registration Form
-                </Button>
-            </View>
-            <View>
+                </View>
+
                 <Text style={
-                    styles.title
-                }>Vist all our official links</Text>
-
-            </View>
-
-
-            <Text style={
-                styles.text
-            }>Charging Network</Text>
-            <View style={
-                styles.buttonSection
-            }>
-                <Button icon="" mode="contained"
-                    style={
-                        styles.button
-                    }
-                    onPress={
-                        () => {
-                            Linking.openURL('https://xvolttechnology.com/charging');
+                    styles.text
+                }>X-Volt Technology LLC</Text>
+                <View style={
+                    styles.buttonSection
+                }>
+                    <Button icon="" mode="contained"
+                        style={
+                            styles.button
                         }
-                }>Visit Site</Button>
-            </View>
-            <Text style={
-                styles.text
-            }>Go Solar Now!</Text>
-            <View style={
-                styles.buttonSection
-            }>
-                <Button icon="" mode="contained"
-                    style={
-                        styles.button
-                    }
-                    onPress={
-                        () => {
-                            Linking.openURL('https://xvolttechnology.com/go-solar/');
+                        onPress={
+                            () => {
+                                Linking.openURL('https://xvolttechnology.com/');
+                            }
+                    }>Official Website</Button>
+                </View>
+                <Text style={
+                    styles.text
+                }>Charging Network</Text>
+                <View style={
+                    styles.buttonSection
+                }>
+                    <Button icon="" mode="contained"
+                        style={
+                            styles.button
                         }
-                }>Visit Site</Button>
-            </View>
-            <Text style={
-                styles.text
-            }>X-Volt Store</Text>
-            <View style={
-                styles.buttonSection
-            }>
-                <Button icon="" mode="contained"
-                    style={
-                        styles.button
-                    }
-                    onPress={
-                        () => {
-                            Linking.openURL('https://xvolttechnology.com/shop/');
+                        onPress={
+                            () => {
+                                Linking.openURL('https://xvolttechnology.com/charging');
+                            }
+                    }>Visit Site</Button>
+                </View>
+                <Text style={
+                    styles.text
+                }>Go Solar Now!</Text>
+                <View style={
+                    styles.buttonSection
+                }>
+                    <Button icon="" mode="contained"
+                        style={
+                            styles.button
                         }
-                }>Visit Site</Button>
+                        onPress={
+                            () => {
+                                Linking.openURL('https://xvolttechnology.com/go-solar/');
+                            }
+                    }>Visit Site</Button>
+                </View>
+                <Text style={
+                    styles.text
+                }>X-Volt Store</Text>
+                <View style={
+                    styles.buttonSection
+                }>
+                    <Button icon="" mode="contained"
+                        style={
+                            styles.button
+                        }
+                        onPress={
+                            () => {
+                                Linking.openURL('https://xvolttechnology.com/shop/');
+                            }
+                    }>Visit Site</Button>
+                </View>
             </View>
+            </ImageBackground>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    outOfContainer:{
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#0e101c',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+    },
     title: {
         textAlign: 'center', // <-- the magic
         fontWeight: 'bold',
@@ -98,7 +124,7 @@ const styles = StyleSheet.create({
         marginBottom: 50
     },
     goBackButton: {
-        marginTop: 10,
+        marginBottom: 10,
         flexDirection: "row",
         color: 'white',
         justifyContent: 'flex-end',
@@ -134,13 +160,17 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         radius: 4,
         borderRadius: 10,
-        width: '30%',
+        width: '40%',
         justifyContent: 'center',
         alignItems: 'center',
         justifyContent: 'center',
         alignItems: 'center'
 
-    }
+    },
+    image: {
+        flex: 1,
+        justifyContent: "center"
+      },
 });
 
 export default Thankyou;

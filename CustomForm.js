@@ -244,6 +244,7 @@ export const CustomForm = ({ navigation }) => {
           value={country}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
+          autoScroll={false}
           onChange={item => {
 
             setCountry(item.value);

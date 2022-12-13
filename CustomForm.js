@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StatusBar, Text, View, StyleSheet, TextInput, Alert, ScrollView, ImageBackground } from 'react-native';
+import {  ImageBackground, StatusBar, Text, View, StyleSheet, TextInput, Alert, ScrollView } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Button } from 'react-native-paper';
@@ -48,14 +48,6 @@ export const CustomForm = ({ navigation }) => {
 
   }
 
-  const submitSusessfulAlert = () =>
-  Alert.alert(
-    "Registeration Sucessful",
-    [
-      { text: "OK", onPress: () => console.log("OK Pressed") }
-    ]
-  );
-
   const isValidEmail = email =>
     // eslint-disable-next-line no-useless-escape
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -94,11 +86,10 @@ export const CustomForm = ({ navigation }) => {
         emailAddress: data.email
       })
       .then(() => {
+        navigation.navigate('Thankyou');
         console.log('User added!');
         resetData();
-        submitSusessfulAlert();
         setSubmitButtonText('Submit');
-        
       });
 
   };
@@ -172,19 +163,19 @@ export const CustomForm = ({ navigation }) => {
   /* Dropdown function ends  */
   return (
     <View style={styles.container}>
-                
-
       <StatusBar animated={true} backgroundColor="#0e101c" barStyle="light-content" />
       <ImageBackground source={require('./assets/wallpaper.png')} resizeMode="cover" style={styles.image}>
 
-      <ScrollView style={[styles.formBox]}>
+
+
+      <ScrollView style={styles.containerBox}>
       <View style={[styles.goBackButton]}>
           <Button
             icon="arrow-u-left-top"
 
             onPress={goLinksView}
           >
-            View Official Links!
+            Links View!
           </Button>
         </View>
       <View>
@@ -325,7 +316,6 @@ export const CustomForm = ({ navigation }) => {
         <Button style={styles.button} icon="send" mode="contained" onPress={handleSubmit(onSubmit)}>
           {submitButtonText}
         </Button>
-        
       </ScrollView>
       </ImageBackground>
     </View>
@@ -386,19 +376,16 @@ const styles = StyleSheet.create({
     radius: 4,
     borderRadius: 10,
   },
-
-
-  formBox:{
-    paddingTop: '30%',
-    padding: 30,
-  },
   container: {
     flex: 1,
     justifyContent: 'center',
-
     backgroundColor: '#0e101c',
     flexDirection: 'column',
     alignItems: 'stretch',
+  },
+  containerBox:{
+    paddingTop: '30%',
+    padding: 30,
   },
   input: {
     backgroundColor: 'white',
@@ -427,7 +414,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: "center"
-  }
+  },
 
 });
 

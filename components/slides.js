@@ -12,8 +12,8 @@ export default [
     },
     {
         id: '2',
-        title: 'Solar Energy',
-        description: 'Creating a solar array that is far less expensive to build.',
+        title: 'GO Solar!',
+        description: 'Selling residential and commercial solar!!',
         image: require('../assets/solarEnergy.json'),
     },
     {
@@ -31,7 +31,7 @@ export default [
     {
         id: '5',
         title: 'Register Yourself!',
-        description: 'Register yourself with in this app to keep yourself updated with the latest news and updates from X-Volt Technology!',
+        description: 'Register yourself within this app to keep yourself updated with the latest news and updates from X-Volt Technology!',
         image: require('../assets/register.json'),
     },
 ]
